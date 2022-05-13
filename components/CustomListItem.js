@@ -23,6 +23,7 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
         )
       );
     return unsubscribe;
+    
   }, []);
 
   return (
