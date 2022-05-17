@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "react-scripts test"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
@@ -17,6 +18,7 @@
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
     "firebase": "^8.2.3",
+    "jest-expect-standalone": "^24.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
@@ -30,8 +32,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/react": "^13.2.0",
+    "global-jsdom": "^8.4.0",
+    "install": "^0.13.0",
+    "jest": "^28.1.0",
+    "jsdom": "^19.0.0",
     "metro-react-native-babel-preset": "^0.70.2",
-    "react-native-dotenv": "^3.3.1"
+    "npm": "^8.10.0",
+    "react-native-dotenv": "^3.3.1",
+    "react-test": "^0.14.1"
   },
   "private": true
 }

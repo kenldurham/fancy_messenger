@@ -30,7 +30,7 @@ export default function RegisterScreen({ navigation }) {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       
-      <Text h4 style={styles.text}>Create Fancy Signal account</Text>
+      <Text h4 style={styles.text}>Create Fancy Signal Messenger</Text>
 
       <View style={ styles.inputContainer}>
         <Input
@@ -39,12 +39,14 @@ export default function RegisterScreen({ navigation }) {
             type="text"
             value={name}
             onChangeText={(text) => setName(text)}
+            style={styles.textInput}
         />
           <Input
             placeholder="Email"
             type="email"
             value={email}
             onChangeText={(text) => setEmail(text)}
+            style={styles.textInput}
         />
           <Input
             placeholder="Password"
@@ -52,6 +54,7 @@ export default function RegisterScreen({ navigation }) {
             secureTextEntry
             value={password}
             onChangeText={(text) => setPassword(text)}
+            style={styles.textInput}
         />
           <Input
             placeholder="Profile Picture URL (optional)"
@@ -59,13 +62,15 @@ export default function RegisterScreen({ navigation }) {
             value={imageUrl}
             onChangeText={(text) => setImageUrl(text)}
             onSubmitEditing={register}
+            style={styles.textInput}
         />
       </View>
 
       <Button
           title="Register"
-          raised
           onPress={register}
+          type="outline"
+          style={styles.registerButton}
         />
       <View style={{height: 100}}/>
     </KeyboardAvoidingView>
@@ -80,6 +85,9 @@ const styles = StyleSheet.create({
       padding: 10,
       backgroundColor: "white",
     },
+    textInput: {
+      padding: 15
+    },
     inputContainer: {
       width: 300,
     },
@@ -92,5 +100,11 @@ const styles = StyleSheet.create({
       marginBottom: 50,
       color: "#89C7E7",
       fontWeight: "700"
-    }
+    },
+    registerButton: {
+      width: 200,
+      marginTop: 10,
+      color:"#05d6ed",
+      border:"1px solid #05d6ed"
+    },
 })

@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
+
 import {
   Platform,
   SafeAreaView,
@@ -52,7 +53,7 @@ const ChatScreen = ({ navigation, route }) => {
           style={{ marginLeft: 10 }}
           onPress={navigation.goBack}
         >
-          <AntDesign name="arrowleft" size={24} color="#89C7E7" />
+          <AntDesign name="arrowleft" size={44} color="#89C7E7" />
         </TouchableOpacity>
       ),
       // headerRight: () => (
@@ -72,12 +73,14 @@ const ChatScreen = ({ navigation, route }) => {
       //         </TouchableOpacity>
       //     </View>
       // )
+      
     });
+    
     return () => {
       unmounted = true;
     };
   }, [navigation, messages]);
-
+  // 6JND0l4Z4aJ40LXg6f98
   const sendMessage = () => {
     Keyboard.dismiss();
 
@@ -89,8 +92,43 @@ const ChatScreen = ({ navigation, route }) => {
       photoURL: auth.currentUser.photoURL,
     });
     setInput("");
+    
   };
   
+
+  // var messRef = db.collection('chats').doc('message');
+
+  // // Remove the 'capital' field from the document
+  // var removeMessage = messRef.update({
+  //     message: firebase.firestore.FieldValue.delete()
+  // });
+  // db.collection("chats").doc("message").delete().then( (data) => {
+  //     console.log("Message Deleted!", data);
+  //     console.log(db.collection("chats").doc("message"))
+  // }).catch((error)=> {
+  //     console.log("Error removing message: ", error);
+  // });
+  const deleteMessage = () => {
+    var docRef = db
+      .collection("chats")
+      .doc(route.params.id)
+      .collection("messages")
+      
+    docRef.get().then((querySnapshot) => {
+      Promise.all(querySnapshot.docs.map((doc) => doc.ref.delete()));
+    });
+  };
+
+  //       {
+  //         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  //         message: input,
+  //         displayName: auth.currentUser.displayName,
+  //         email: auth.currentUser.email,
+  //         photoURL: auth.currentUser.photoURL,
+  //       }
+  //     );
+  //   };
+
   useLayoutEffect(() => {
     const unsubscribe = db
       .collection("chats")
@@ -107,6 +145,7 @@ const ChatScreen = ({ navigation, route }) => {
       );
     return unsubscribe;
   }, [route]);
+  
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -116,7 +155,6 @@ const ChatScreen = ({ navigation, route }) => {
         style={styles.container}
         keyboardVerticalOffset={90}
       >
-       
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
             <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
@@ -168,15 +206,20 @@ const ChatScreen = ({ navigation, route }) => {
             </ScrollView>
 
             <View style={styles.footer}>
+              <TouchableOpacity onPress={deleteMessage} activeOpacity={0.5}>
+                <Ionicons name="close-circle-sharp" size={44} color="#ad0303" />
+              </TouchableOpacity>
+              
               <TextInput
                 value={input}
                 onChangeText={(text) => setInput(text)}
                 onSubmitEditing={sendMessage}
                 placeholder="Fancy Message"
                 style={styles.textInput}
+                autoFocus={true}
               />
               <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
-                <Ionicons name="send" size={24} color="#2B68E6" />
+                <Ionicons name="send" size={44} color="#049c02" />
               </TouchableOpacity>
             </View>
           </>
@@ -190,7 +233,7 @@ export default ChatScreen;
 
 const styles = StyleSheet.create({
   text: {
-    color: "#00ffff",
+    color: "#000000",
     marginLeft: 10,
     fontWeight: "700",
   },
